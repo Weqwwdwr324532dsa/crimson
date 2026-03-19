@@ -98,14 +98,19 @@ h1 {
     <div class="timer" id="timer">02:00</div>
     <div class="scarcity">⚠️ Only 23 rewards left</div>
 
-    <a href="YOUR_CPA_LINK" class="btn">Claim Now</a>
+    <a href="YOUR_CPA_LINK" class="btn">🔥 Claim Now</a>
 
     <p style="font-size:12px;opacity:0.6;margin-top:20px;">
     This is a promotional page. We are not officially associated with any game.
     </p>
 </div>
 
+<!-- Click Sound -->
+<audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+
 <script>
+
+// Timer
 let t=120;
 setInterval(()=>{
 let m=Math.floor(t/60),s=t%60;
@@ -116,6 +121,28 @@ if(t>0)t--;
 // Random scarcity
 let left = Math.floor(Math.random()*30)+10;
 document.querySelector(".scarcity").innerHTML = "⚠️ Only " + left + " rewards left";
+
+// Button Click Logic (Sound + Loading + Redirect)
+document.querySelector(".btn").addEventListener("click", function(e){
+    e.preventDefault();
+
+    // Play Sound
+    document.getElementById("clickSound").play();
+
+    // Show Loading Screen
+    document.body.innerHTML = `
+    <div style="background:black;color:white;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+        <h1>🔄 Verifying Your Reward...</h1>
+        <p>Please wait...</p>
+    </div>
+    `;
+
+    // Redirect after 2 sec
+    setTimeout(()=>{
+        window.location.href="YOUR_CPA_LINK";
+    },2000);
+});
+
 </script>
 
 </body>
